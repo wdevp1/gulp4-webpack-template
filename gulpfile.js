@@ -7,15 +7,17 @@ const imageMinify = require('./gulp/tasks/imageMinify');
 const styles = require('./gulp/tasks/styles');
 const clean = require('./gulp/tasks/clean');
 const pug2html = require('./gulp/tasks/pug');
+const html = require('./gulp/tasks/html');
 const spriteSVG = require('./gulp/tasks/spriteSVG');
-const serve = require('./gulp/tasks/serve');
+const servePug = require('./gulp/tasks/servePug');
+const serveHtml = require('./gulp/tasks/serveHtml');
 const spritePNG = require('./gulp/tasks/spritePNG');
 
 global.$ = {
   bs: require('browser-sync').create(),
 }
 
-const build = gulp.parallel(
+const buildPug = gulp.parallel(
   imageMinify,
   scripts,
   vendorsJs,
@@ -27,13 +29,36 @@ const build = gulp.parallel(
   pug2html
 );
 
-exports.default = gulp.series(
-  clean,
-  build,
-  serve
+const buildHtml = gulp.parallel(
+  imageMinify,
+  scripts,
+  vendorsJs,
+  vendorsCss,
+  styles,
+  spriteSVG,
+  spritePNG,
+  fonts,
+  html
 );
 
-exports.build = gulp.series(
+exports.startPug = gulp.series(
   clean,
-  build
+  buildPug,
+  servePug
+);
+
+exports.startHtml = gulp.series(
+  clean,
+  buildHtml,
+  serveHtml
+);
+
+exports.buildPug = gulp.series(
+  clean,
+  buildPug
+);
+
+exports.buildHtml = gulp.series(
+  clean,
+  buildHtml
 );
