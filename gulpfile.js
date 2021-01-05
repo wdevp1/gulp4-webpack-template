@@ -12,6 +12,7 @@ const spriteSVG = require('./gulp/tasks/spriteSVG');
 const servePug = require('./gulp/tasks/servePug');
 const serveHtml = require('./gulp/tasks/serveHtml');
 const spritePNG = require('./gulp/tasks/spritePNG');
+const grid = require('./gulp/tasks/grid');
 
 global.$ = {
   bs: require('browser-sync').create(),
@@ -43,22 +44,28 @@ const buildHtml = gulp.parallel(
 
 exports.startPug = gulp.series(
   clean,
+  grid,
   buildPug,
   servePug
 );
 
 exports.startHtml = gulp.series(
   clean,
+  grid,
   buildHtml,
   serveHtml
 );
 
 exports.buildPug = gulp.series(
   clean,
+  grid,
   buildPug
 );
 
 exports.buildHtml = gulp.series(
   clean,
+  grid,
   buildHtml
 );
+
+exports.grid = gulp.series(grid);

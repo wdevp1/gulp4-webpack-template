@@ -5,6 +5,7 @@ const pngSprite = require('./spritePNG');
 const styles = require('./styles');
 const html = require('./html');
 const script = require('./scripts');
+const grid = require('./grid');
 
 // Запуск сервера а также слежка за файлами
 
@@ -22,4 +23,5 @@ module.exports = function serve() {
   gulp.watch('./src/static/js/**/*.js', gulp.series(script));
   gulp.watch('./src/html/**/*.html', gulp.series(html));
   gulp.watch('./dist/*.html').on('change', $.bs.reload);
+  gulp.watch('./smartgrid.js', gulp.series(grid));
 }
