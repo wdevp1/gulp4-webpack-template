@@ -8,7 +8,7 @@ const { argv } = require('yargs');
 const gulpIf = require('gulp-if');
 
 module.exports = function scripts(done) {
-  gulp.src('./src/static/js/*.js')
+  gulp.src('./src/static/js/scripts.js')
     .pipe(gulpIf(!argv.prod, sourcemaps.init()))
     .pipe(eslint())
     .pipe(eslint.format())
@@ -18,7 +18,6 @@ module.exports = function scripts(done) {
     .pipe(rename({suffix: '.min'}))
     .pipe(gulpIf(argv.prod, uglify()))
     .pipe(gulpIf(!argv.prod, sourcemaps.write()))
-    .pipe(gulp.dest('./dist/js'))
-    .pipe(gulpIf(!argv.prod, $.bs.stream()));
+    .pipe(gulpIf(!argv.webpack, gulp.dest('./dist/js')));
   done();
 };

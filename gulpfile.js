@@ -12,6 +12,7 @@ const spriteSVG = require('./gulp/tasks/spriteSVG');
 const servePug = require('./gulp/tasks/servePug');
 const serveHtml = require('./gulp/tasks/serveHtml');
 const spritePNG = require('./gulp/tasks/spritePNG');
+const scriptsWebpack = require('./gulp/tasks/scriptswebpack');
 const grid = require('./gulp/tasks/grid');
 
 global.$ = {
@@ -21,6 +22,7 @@ global.$ = {
 const buildPug = gulp.parallel(
   imageMinify,
   scripts,
+  scriptsWebpack,
   vendorsJs,
   vendorsCss,
   styles,
@@ -33,6 +35,7 @@ const buildPug = gulp.parallel(
 const buildHtml = gulp.parallel(
   imageMinify,
   scripts,
+  scriptsWebpack,
   vendorsJs,
   vendorsCss,
   styles,

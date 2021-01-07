@@ -15,10 +15,7 @@ module.exports = function styles(done) {
     .pipe(gulpIf(!argv.prod, sourcemaps.init()))
     .pipe(scss())
     .pipe(rename({suffix: '.min'}))
-    .pipe(autoprefixer({
-      overrideBrowserslist: ["last 4 version"],
-      cascade: false
-    }))
+    .pipe(autoprefixer())
     .pipe(gulpIf(argv.prod, gcmq()))
     .pipe(gulpIf(argv.prod, cleanCSS({
       debug: true,

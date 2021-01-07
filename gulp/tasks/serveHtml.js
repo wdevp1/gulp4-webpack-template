@@ -5,6 +5,7 @@ const pngSprite = require('./spritePNG');
 const styles = require('./styles');
 const html = require('./html');
 const script = require('./scripts');
+const webpack = require('./scriptswebpack');
 const grid = require('./grid');
 
 // Запуск сервера а также слежка за файлами
@@ -20,7 +21,7 @@ module.exports = function serve() {
   gulp.watch('./src/static/images/sprite/svg/*.svg', gulp.series(svgSprite));
   gulp.watch('./src/static/images/sprite/png/*.png', gulp.series(pngSprite));
   gulp.watch('./src/static/scss/**/*.scss', gulp.series(styles));
-  gulp.watch('./src/static/js/**/*.js', gulp.series(script));
+  gulp.watch('./src/static/js/**/*.js', gulp.series(script, webpack));
   gulp.watch('./src/html/**/*.html', gulp.series(html));
   gulp.watch('./dist/*.html').on('change', $.bs.reload);
   gulp.watch('./smartgrid.js', gulp.series(grid));
